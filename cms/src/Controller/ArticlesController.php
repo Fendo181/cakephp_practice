@@ -44,7 +44,7 @@ class ArticlesController extends AppController
             // エンティティーを保存して成功したらメッセージを表示してリダイレクトします。
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
-                return $this->redirect(['action ' => 'index']);
+                return $this->redirect(['action' => 'index']);
             }
             // 保存に失敗した場合にエラーメッセージを表示します。
             $this->Flash->error(__('Unable to add your article.'));
