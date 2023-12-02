@@ -13,7 +13,11 @@ class ArticlesTable extends Table
     public function initialize(array $config): void
     {
         $this->addBEhavior('Timestamp');
-        $this->belongsToMany('Tags');
+        $this->belongsToMany('Tags',[
+            'joinTable' => 'articles_tags',
+            // 'dependent'オプションはarticlesのレコードが削除された時、 関連するtagを削除するよう指示します。
+            'dependent' => true,
+        ]);
     }
 
     public function beforeSave(EventInterface $event, $entity, $options)
@@ -63,7 +67,9 @@ class ArticlesTable extends Table
 
         // 新しいタグを追加する
         foreach ($newTags as $tag) {
+            // タグのエンティティーを作成します。
             $out[] = $this->Tags->newEntity(['title' => $tag]);
+            debug($out);
         }
 
         return $out;
