@@ -83,6 +83,23 @@ class ArticlesController extends AppController
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
             return $this->redirect(['action' => 'index']);
         }
+    }
 
+    public function tags()
+    {
+        // passキーは、CakePHPが自動的に提供する配列です。
+        // 例えば、URL /tags/search/3 は、
+        // $this->request->getParam('pass.0') に 3 を設定します。
+        // よってpassを指定すれば全ての URL パスセグメントを含みます。
+        $tags = $this->request->getParam('pass');
+        $articles = $this->Articles->find('tagged',[
+            'tags' => $tags
+        ])
+        ->all();
+
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags
+        ]);
     }
 }
