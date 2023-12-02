@@ -28,6 +28,45 @@ class ArticlesTable extends Table
             // スラグをスキーマで定義された最大長に調整します。
             $entity->slug = substr($sluggedTitle, 0, 191);
         }
+
+        // tag_string が送信された場合は、タグのデータを処理します。
+        if ($entity->tag_string) {
+            $entity->tags = $this->_buildTags($entity->tag_string);
+        }
+    }
+
+    public function _buildTags($tagString)
+    {
+        // タグをトリミング
+        $newTags = array_map('trim', explode(',', $tagString));
+        // すべての空のタグを削除
+        $newTags = array_filter($newTags);
+        // 重複するタグの削除
+        $newTags = array_unique($newTags);
+
+        $out = [];
+        $query = $this->Tags->find()
+                            ->where(['Tags.title IN' => $newTags]);
+
+        // 新しいタグのリストから既存のタグを削除します。
+        foreach ($query->extract('title') as $existing) {
+            $index = array_search($existing, $newTags);
+            if ($index !== false) {
+                unset($newTags[$index]);
+            }
+        }
+
+        // 既存のタグを追加します。
+        foreach ($query as $tag) {
+            $out[] = $tag;
+        }
+
+        // 新しいタグを追加する
+        foreach ($newTags as $tag) {
+            $out[] = $this->Tags->newEntity(['title' => $tag]);
+        }
+
+        return $out;
     }
 
     public function validationDefault(Validator $validator): Validator
@@ -37,7 +76,7 @@ class ArticlesTable extends Table
                     ->minLength('title', 3)
                     ->maxLength('title', 255)
                     ->notEmptyString('body')
-                    ->minLength('body', 10);
+                    ->minLength('body', 3);
 
         return $validator;
     }

@@ -21,7 +21,11 @@ class ArticlesController extends AppController
     // 値 'first-post' が CakePHP のルーティングとディスパッチレイヤーで $slug に渡されます。
     public function view($slug = null)
     {
-        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $article = $this->Articles
+                        ->findBySlug($slug)
+                        ->contain('Tags')
+                        ->firstOrFail();
+
         $this->set(compact('article'));
     }
 
