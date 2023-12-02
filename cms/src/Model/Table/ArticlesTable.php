@@ -32,7 +32,7 @@ class ArticlesTable extends Table
     {
         // title と body のバリデーションルールを作成します。
         $validator->notEmptyString('title')
-                    ->minLength('title', 10)
+                    ->minLength('title', 3)
                     ->maxLength('title', 255)
                     ->notEmptyString('body')
                     ->minLength('body', 10);
