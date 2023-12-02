@@ -11,7 +11,7 @@ class ArticlesController extends AppController
         $this->loadComponent('Flash'); // FlashComponent をインクルード
     }
 
-    public function index()
+    public function index(): void
     {
         $articles = $this->Paginator->paginate($this->Articles->find());
         $this->set(compact('articles'));
@@ -48,6 +48,21 @@ class ArticlesController extends AppController
             }
             // 保存に失敗した場合にエラーメッセージを表示します。
             $this->Flash->error(__('Unable to add your article.'));
+        }
+        $this->set('article', $article);
+    }
+
+    public function edit($slug)
+    {
+        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        if ($this->request->is(['post','put'])) {
+            $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('Your article has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            // 保存に失敗した場合にエラーメッセージを表示します。
+            $this->Flash->error(__('Unable to edit your article.'));
         }
         $this->set('article', $article);
     }
