@@ -55,13 +55,10 @@ class ArticlesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->scalar('title')
-            ->maxLength('title', 50)
-            ->allowEmptyString('title');
-
-        $validator
-            ->scalar('body')
-            ->allowEmptyString('body');
+            ->notEmptyString('title')
+            ->requirePresence('title', 'create')
+            ->notEmptyString('body')
+            ->requirePresence('body', 'create');
 
         return $validator;
     }
