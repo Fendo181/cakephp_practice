@@ -35,6 +35,18 @@ class UsersController extends AppController
         }
     }
 
+    public function logout()
+    {
+        $result = $this->Authentication->getResult();
+        // ログアウト成功後のリダイレクト先
+        // POST、GET、問わずに、ユーザーがログインしている場合はリダイレクトさせる。
+        if($result && $result->isValid()){
+            // ログアウト処理
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+    }
+
     /**
      * Index method
      *
