@@ -38,4 +38,18 @@ class ArticlesController extends AppController
         }
         $this->set('article', $article);
     }
+
+    public function edit($id = null)
+    {
+        $article = $this->Articles->get($id);
+        if ($this->request->is(['post','put'])) {
+           $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+               $this->Flash->success(__('記事の更新に成功しました'));
+               return $this->redirect(['action' => 'index']);
+           }
+              $this->Flash->error(__('記事の更新に失敗しました'));
+        }
+        $this->set('article', $article);
+    }
 }

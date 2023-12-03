@@ -18,6 +18,9 @@
             <td>
                 <?= $article->created->format(DATE_RFC850) ?>
             </td>
+            <td>
+                <?= $this->Html->link("編集", ['action' => 'edit', $article->id]) ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>
