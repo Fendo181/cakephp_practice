@@ -69,7 +69,6 @@ class ArticlesTable extends Table
         foreach ($newTags as $tag) {
             // タグのエンティティーを作成します。
             $out[] = $this->Tags->newEntity(['title' => $tag]);
-            debug($out);
         }
 
         return $out;
