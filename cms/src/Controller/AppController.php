@@ -28,6 +28,14 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // アプリケーション内のすべてのコントローラーの index、view アクションをパブリックにして、認証チェックをスキップします
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+    }
+
     /**
      * Initialization hook method.
      *
