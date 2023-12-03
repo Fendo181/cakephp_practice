@@ -93,6 +93,7 @@
       <path value="$PROJECT_DIR$/cms/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/cms/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/cms/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/cms/vendor/cakephp/authentication" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4">

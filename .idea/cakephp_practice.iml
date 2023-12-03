@@ -86,6 +86,7 @@
       <excludeFolder url="file://$MODULE_DIR$/cms/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/cms/vendor/twig/markdown-extra" />
       <excludeFolder url="file://$MODULE_DIR$/cms/vendor/twig/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/cms/vendor/cakephp/authentication" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
