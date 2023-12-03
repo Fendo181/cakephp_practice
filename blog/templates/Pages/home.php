@@ -80,7 +80,7 @@ endif;
                 <img alt="CakePHP" src="https://cakephp.org/v2/img/logos/CakePHP_Logo.svg" width="350" />
             </a>
             <h1>
-                Welcome to CakePHP <?= h(Configure::version()) ?> Strawberry (🍓)
+                Welcome to CakePHP!!! <?= h(Configure::version()) ?> Strawberry (🍓)
             </h1>
         </div>
     </header>
