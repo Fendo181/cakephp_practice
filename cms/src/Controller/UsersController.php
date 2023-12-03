@@ -11,6 +11,30 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // 認証を必要としないログインアクションを構成し、
+        // 無限リダイレクトループの問題を防ぎます
+        $this->Authentication->addUnauthenticatedActions(['login']);
+    }
+
+    public function login()
+    {
+        $this->request->allowMethod(['get','post']);
+        $result = $this->Authentication->getResult();
+        // ユーザがログインをしている場合は記事一覧のリダイレクトを行う
+        if($result && $result->isValid()){
+            // ログイン成功後のリダイレクト先
+            $redirect = $this->request->getQuery('redirect',[
+                'controller' => 'Articles',
+                'action' => 'index',
+            ]);
+            return $this->redirect($redirect);
+        }
+    }
+
     /**
      * Index method
      *
