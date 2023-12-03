@@ -17,3 +17,8 @@ bin/cake server
 ```
 
 `http://localhost:8765/`
+
+### 参考
+
+- [cmsチュートリアル](https://book.cakephp.org/4/ja/tutorials-and-examples.html)
+- [Blogチュートリアル](https://book.cakephp.org/3/ja/tutorials-and-examples/blog/blog.html)
