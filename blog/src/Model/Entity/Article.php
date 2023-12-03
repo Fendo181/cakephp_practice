@@ -6,7 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Article Entity
+ * Articles Entity
  *
  * @property int $id
  * @property string|null $title
