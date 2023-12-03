@@ -63,7 +63,11 @@ class ArticlesController extends AppController
 
     public function edit($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $article = $this->Articles
+                        ->findBySlug($slug)
+                        ->contain('Tags')
+                        ->firstOrFail();
+
         if ($this->request->is(['post','put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
